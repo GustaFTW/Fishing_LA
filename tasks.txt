@@ -1,0 +1,16 @@
+1 -- parte
+descobrir a forma de capturar a imagem do jogo (sem ban)
+
+2 -- parte
+usar PDI para conseguir distinguir quando os eventos de interesse ocorrem
+    2.1 eventos de interesse:
+        - ponto de exclamação amarelo
+        - habilidade da rede
+            - trecho vermelho na barra do minigame
+        - ferramenta quebrando
+após a detecção de um evento, prosseguir com a função correta
+    2.2 funções:
+        - puxar a vara quando detecar o evento do peixe
+        - iniciar o minigame de rede
+            - manter o cursor no vermelho
+        - com a ferramenta quebrada, andar até o local de reparo e reparar
