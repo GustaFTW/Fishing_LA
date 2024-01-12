@@ -1,5 +1,5 @@
 1 -- parte
-descobrir a forma de capturar a imagem do jogo (sem ban)
+descobrir a forma de capturar a imagem do jogo (sem ban) 
 
 2 -- parte
 usar PDI para conseguir distinguir quando os eventos de interesse ocorrem
