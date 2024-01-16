@@ -1,1 +1,5 @@
 testar técnicas de preprocessamento antes de chamar a funcao locate do pyautogui
+
+
+criar as funções: crop (função que acha as coordenadas da isca)
+                  got_hook (função que detecta evento de peixe)
