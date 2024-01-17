@@ -3,3 +3,17 @@ testar técnicas de preprocessamento antes de chamar a funcao locate do pyautogu
 
 criar as funções: crop (função que acha as coordenadas da isca)
                   got_hook (função que detecta evento de peixe)
+
+
+main.py: le a tela do jogo
+         solta a isca 
+         procura pela isca
+            -> caso erro:
+                    continue procurando
+            -> caso encontre:
+                    crop a tela somente para a zona de evento
+                    espera pelo evento
+                    evento ocorreu
+                    puxa a isca
+                    recomeça o processo (a partir de solta a isca)
+            
