@@ -5,13 +5,14 @@ import pyautogui
 
 
 CONFIDENCE = 0.7
-FISHING_WATCH_TIME = 8
+FISHING_WATCH_TIME = 20
 SHIFT = 75
+WATCHING_BAIT_TIME = 5
 
 class FishingAgent:
     def __init__(self, main_agent) -> None:
         self.main_agent = main_agent
-        self.fishing_target = cv.imread("modules/fishing/assets/imagem_isca_crop.jpg")
+        self.fishing_target = cv.imread("C:\\Users\\Gusta\\Documents\\Projetos\\Lost Ark\\Fishing_LA\\modules\\fishing\\assets\\crop_raridade_roxa.jpg")
         if self.fishing_target is None:
             print("Couldn't load fishing target\nExiting program...")
             exit()
@@ -23,22 +24,32 @@ class FishingAgent:
     def cast_lure(self):
         print("Casting...")
         pyautogui.press("e")
-        time.sleep(0.5)
+        time.sleep(3)
         self.find_lure()
 
     def find_lure(self):
-        if self.main_agent.cur_img is not None:
-            # print("entering this function again")
-            try:
-                self.res = pyautogui.locate(self.fishing_target, 
-                                       self.main_agent.cur_img, 
-                                       confidence=CONFIDENCE)
-                if self.res != (0, 0, 0, 0):
-                    print("Lure found!")
-                    self.crop_and_watch_lure(self.res)
-            except Exception as e:
-                print(f"Couldn't find the bait...")
-    
+        self.watch_time_bait = time.time()
+        while True:
+            if time.time() - self.watch_time_bait >= WATCHING_BAIT_TIME:
+                print("Time out, pulling the line...")
+                self.pull_line()
+                break
+            else: 
+                if self.main_agent.cur_img is not None:
+                    # print("entering this function again")
+                    try:
+                        self.res = pyautogui.locate(self.fishing_target, 
+                                            self.main_agent.cur_img, 
+                                            confidence=CONFIDENCE)
+                        if self.res != (0, 0, 0, 0):
+                            print("Lure found!")
+                            self.crop_and_watch_lure(self.res)
+                            break
+
+                        
+                    except Exception as e:
+                        print(f"Couldn't find the bait...")
+
     # def crop_on_lure(self, aoi):
     #     # print("Starting the crop...")
 
@@ -57,6 +68,7 @@ class FishingAgent:
         watch_time = time.time()
 
         while True:
+            self.watch_time_bait = time.time()
             print("still looking...")
             try: 
                 # Define the res
@@ -77,17 +89,15 @@ class FishingAgent:
 
                 if (yellow_regions != 0).any():
                     print("Fish hooked!")
-                    time.sleep(1)
                     self.pull_line()
+                    time.sleep(1)
                     break
                 if time.time() - watch_time >= FISHING_WATCH_TIME:
                     print("Time out")
                     break
-                time.sleep(1)
+                # time.sleep(1)
             except Exception as e:
                 print(f"Error: {e}")
-
-        self.pull_line()
 
     def pull_line(self):
         print("Pulling line!")
