@@ -54,8 +54,8 @@ def update_screen(agent):
         if time.time() - fps_report_time >= fps_report_delay:
             print(f"FPS:{1 / (ex_time):.2f} " + str(), end="\r")
             fps_report_time = time.time()
-        t0 = time.time()
         time.sleep(0.005)
+        t0 = time.time()
 
 def print_menu():
     print("Enter a command: ")
@@ -87,6 +87,8 @@ if __name__ == "__main__":
         elif user_input == "z":
             pass
         elif user_input == "f":
+            print("Waiting 5 secs to start fishing...")
+            time.sleep(5)
             fishing_agent = FishingAgent(main_agent)
             fishing_agent.run()
         elif user_input == "q":
