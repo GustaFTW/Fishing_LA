@@ -12,7 +12,7 @@ WATCHING_BAIT_TIME = 5
 class FishingAgent:
     def __init__(self, main_agent) -> None:
         self.main_agent = main_agent
-        self.fishing_target = cv.imread("C:\\Users\\Gusta\\Documents\\Projetos\\Lost Ark\\Fishing_LA\\modules\\fishing\\assets\\crop_raridade_roxa.jpg")
+        self.fishing_target = cv.imread("modules/fishing/assets/crop_raridade_roxa.jpg")
         if self.fishing_target is None:
             print("Couldn't load fishing target\nExiting program...")
             exit()
@@ -50,19 +50,6 @@ class FishingAgent:
                     except Exception as e:
                         print(f"Couldn't find the bait...")
 
-    # def crop_on_lure(self, aoi):
-    #     # print("Starting the crop...")
-
-    #     # Define the SHIFT
-    #     SHIFT = 75
-        
-    #     # Define the res
-    #     x, y, w, h = aoi 
-    #     # Crop the image
-    #     cropped_image = self.main_agent.cur_img[(y - SHIFT):y+(h + SHIFT), (x - SHIFT):x +(w + SHIFT)]
-
-    #     self.cropped_image = cropped_image
-
     def crop_and_watch_lure(self, res):
         print("Watching lure")
         watch_time = time.time()
@@ -74,7 +61,7 @@ class FishingAgent:
                 # Define the res
                 x, y, w, h = res 
                 # Crop the image
-                image = np.array(self.main_agent.cur_img)[(y - SHIFT):y+(h + SHIFT), (x - SHIFT):x +(w + SHIFT)]
+                image = np.array(self.main_agent.curr_img)[(y - SHIFT):y + (h - (int(SHIFT / 2))), (x - SHIFT):x +(w + SHIFT)]
 
                 # Convert the image to hsv
                 image_hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)
