@@ -61,7 +61,7 @@ class FishingAgent:
                 # Define the res
                 x, y, w, h = res 
                 # Crop the image
-                image = np.array(self.main_agent.curr_img)[(y - SHIFT):y + (h - (int(SHIFT / 2))), (x - SHIFT):x +(w + SHIFT)]
+                image = np.array(self.main_agent.cur_img)[(y - (SHIFT + 30)):(y + SHIFT//2), (x - (SHIFT - 20)):(x + w + (SHIFT - 20))]
 
                 # Convert the image to hsv
                 image_hsv = cv.cvtColor(image, cv.COLOR_BGR2HSV)
