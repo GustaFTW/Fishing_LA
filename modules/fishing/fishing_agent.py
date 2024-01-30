@@ -6,7 +6,7 @@ import pyautogui
 
 CONFIDENCE = 0.7
 FISHING_WATCH_TIME = 20
-SHIFT = 75
+SHIFT = 10
 WATCHING_BAIT_TIME = 5
 
 class FishingAgent:
